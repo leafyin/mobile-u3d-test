@@ -1,0 +1,3 @@
+# ignore dir and file
+.idea/*
+__pycache__/*
