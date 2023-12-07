@@ -4,9 +4,9 @@ from airtest.core.api import *
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 
 
-class Base(metaclass=abc.ABCMeta):
+class Base:
 
-    def __init__(self, deviceid, logdir):
+    def __init__(self, deviceid, logdir="./report/"):
         auto_setup(devices=[
             f"Android://127.0.0.1:5037/{deviceid}?cap_method=JAVACAP"
             f"&&ori_method=MINICAPORI"
@@ -33,5 +33,10 @@ class Base(metaclass=abc.ABCMeta):
     def set_text(self, name, content):
         pass
 
-    def find(self, obj, direction=True, length=300):
+    @abc.abstractmethod
+    def find_on_vertical(self, obj, length, top_target=None, end_target=None):
+        pass
+
+    @abc.abstractmethod
+    def find_on_horizontal(self, obj, target, length):
         pass
