@@ -25,8 +25,13 @@ class Base:
     def click(self, name):
         pass
 
-    def physical_back(self):
-        self.device.keyevent("4")
+    def key_event(self, keycode):
+        """
+        调用KeyEvent事件
+        :param keycode:
+        :return:
+        """
+        self.device.keyevent(str(keycode))
         sleep(self.speed)
 
     @abc.abstractmethod
