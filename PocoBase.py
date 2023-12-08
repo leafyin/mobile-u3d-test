@@ -1,5 +1,5 @@
 # encoding=utf-8
-from abc import ABC
+import sys
 
 from airtest.core.api import *
 from poco.exceptions import PocoNoSuchNodeException, PocoTargetTimeout
@@ -7,20 +7,18 @@ from poco.exceptions import PocoNoSuchNodeException, PocoTargetTimeout
 from Base import Base
 
 
-class AndroidPocoBase(Base, ABC):
+class AndroidPocoBase(Base):
 
-    def __init__(self, deviceid):
-        super().__init__(deviceid)
+    def __init__(self, deviceid, package):
+        super().__init__(deviceid, package)
 
     def click(self, name):
         self.poco(name).click()
-        sleep(self.speed)
 
     def set_text(self, name, content):
         this = self.poco(name)
         this.click()
         this.set_text(content)
-        sleep(self.speed)
 
     def find_on_horizontal(self, obj, target, length):
         """
@@ -41,7 +39,7 @@ class AndroidPocoBase(Base, ABC):
                 break
             swipe(start_pos, end_pos, duration=0.25, steps=60)
 
-    def find_on_vertical(self, obj: str, length, top_target=None, end_target=None):
+    def find_on_vertical(self, obj, length, top_target=None, end_target=None):
         """
         垂直查找元素
         duration&steps可以控制滑动的视觉流畅度，默认duration=0.25，steps=60
@@ -114,5 +112,5 @@ class AndroidPocoBase(Base, ABC):
 
 
 if __name__ == '__main__':
-    p = AndroidPocoBase("10.1.0.163:5555", "")
-    pass
+    apb = AndroidPocoBase(sys.argv[1], sys.argv[2])
+    apb.key_event(4)

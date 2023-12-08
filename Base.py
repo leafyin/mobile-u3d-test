@@ -6,7 +6,9 @@ from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 
 class Base:
 
-    def __init__(self, deviceid, logdir="./report/"):
+    def __init__(self, deviceid, packagename, logdir="./report/"):
+        ST.LOG_FILE = f"{deviceid}.txt"
+        ST.OPDELAY = 1
         auto_setup(devices=[
             f"Android://127.0.0.1:5037/{deviceid}?cap_method=JAVACAP"
             f"&&ori_method=MINICAPORI"
@@ -16,10 +18,11 @@ class Base:
         self.device = self.poco.device
         self.width = self.device.display_info["width"]
         self.height = self.device.display_info["height"]
-        self.speed = 1
         # 点亮屏幕
         if not self.device.is_screenon():
             self.poco.device.keyevent(keyname="26")
+        start_app(packagename)
+        sleep(5)
 
     @abc.abstractmethod
     def click(self, name):
@@ -32,7 +35,6 @@ class Base:
         :return:
         """
         self.device.keyevent(str(keycode))
-        sleep(self.speed)
 
     @abc.abstractmethod
     def set_text(self, name, content):

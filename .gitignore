@@ -1,3 +1,4 @@
 # ignore dir and file
 .idea/*
 __pycache__/*
+./report/*
