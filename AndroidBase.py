@@ -3,7 +3,6 @@ import sys
 
 from airtest.core.api import *
 from poco.exceptions import PocoNoSuchNodeException, PocoTargetTimeout
-
 from Base import Base
 
 
@@ -14,6 +13,10 @@ class AndroidPocoBase(Base):
 
     def click(self, name):
         self.poco(name).click()
+
+    def double_click(self, name):
+        pos = self.poco(name).get_position()
+        double_click((pos * self.width, pos * self.height))
 
     def set_text(self, name, content):
         this = self.poco(name)
