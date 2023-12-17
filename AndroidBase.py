@@ -8,8 +8,8 @@ from Base import Base
 
 class AndroidPocoBase(Base):
 
-    def __init__(self, deviceid, package):
-        super().__init__(deviceid, package)
+    def __init__(self, deviceid):
+        super().__init__(deviceid)
 
     def click(self, name):
         self.poco(name).click()
@@ -115,5 +115,5 @@ class AndroidPocoBase(Base):
 
 
 if __name__ == '__main__':
-    apb = AndroidPocoBase(sys.argv[1], sys.argv[2])
-    apb.key_event(4)
+    apb = AndroidPocoBase(sys.argv[1])
+    apb.key_event(26)

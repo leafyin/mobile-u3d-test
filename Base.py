@@ -1,5 +1,7 @@
 # encoding=utf-8
 import abc
+import platform
+
 import openpyxl
 from airtest.core.api import *
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
@@ -35,14 +37,20 @@ def gen_py():
 
 class Base(metaclass=abc.ABCMeta):
 
-    def __init__(self, deviceid, logdir="./report/"):
+    def __init__(self, deviceid, log_dir=None):
         ST.LOG_FILE = f"{deviceid}.txt"
         ST.OPDELAY = 1
+        if log_dir is None:
+            system = platform.system()
+            if system == 'Windows':
+                log_dir = ".\\report\\"
+            elif system in ['Darwin', 'Linux']:
+                log_dir = "./report/"
         auto_setup(devices=[
             f"Android://127.0.0.1:5037/{deviceid}?cap_method=JAVACAP"
             f"&&ori_method=MINICAPORI"
             f"&&touch_method=MAXTOUCH"
-        ], logdir=logdir)
+        ], logdir=log_dir)
         self.poco = AndroidUiautomationPoco()
         self.device = self.poco.device
         self.width = self.device.display_info["width"]
