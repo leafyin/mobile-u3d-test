@@ -5,6 +5,34 @@ from airtest.core.api import *
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 
 
+def gen_py():
+    """
+    根据excel表格生成python对象，写脚本的时候可以运行该方法，把表格内容转为python类对象
+    :return:
+    """
+    prefix = ""
+    filepath = "../ResourceConfig.xlsx"
+    workbook = openpyxl.load_workbook(filepath)
+    sheet_names = workbook.sheetnames
+    for sheet_name in sheet_names:
+        sheet = workbook[sheet_name]
+        max_row = sheet.max_row + 1
+        print(sheet_name)
+        with open(file=f"../gen/{sheet_name}.py", mode="w+", encoding="UTF-8-sig") as f:
+            f.write(f"class {sheet_name}:\r\n")
+            for i in range(1, max_row):
+                if sheet_name == "Sheet":
+                    continue
+                if sheet_name == "Permission":
+                    f.write(f"    {sheet[f'A{i}'].value} = \""
+                            f"{prefix}{sheet[f'B{i}'].value}\"\r\n")
+                elif sheet_name == "Component":
+                    f.write(f"    {sheet[f'A{i}'].value} = \"{sheet[f'B{i}'].value}\"\r\n")
+                else:
+                    f.write(f"    {sheet[f'A{i}'].value} = \""
+                            f"{prefix}{sheet[f'B{i}'].value}\"\r\n")
+
+
 class Base(metaclass=abc.ABCMeta):
 
     def __init__(self, deviceid, logdir="./report/"):
@@ -51,29 +79,3 @@ class Base(metaclass=abc.ABCMeta):
     def find_on_horizontal(self, obj, target, length):
         pass
 
-    def gen_py(self):
-        """
-        根据excel表格生成python对象，写脚本的时候可以运行该方法，把表格内容转为python类对象
-        :return:
-        """
-        prefix = ""
-        filepath = "../ResourceConfig.xlsx"
-        workbook = openpyxl.load_workbook(filepath)
-        sheet_names = workbook.sheetnames
-        for sheet_name in sheet_names:
-            sheet = workbook[sheet_name]
-            max_row = sheet.max_row + 1
-            print(sheet_name)
-            with open(file=f"../gen/{sheet_name}.py", mode="w+", encoding="UTF-8-sig") as f:
-                f.write(f"class {sheet_name}:\r\n")
-                for i in range(1, max_row):
-                    if sheet_name == "Sheet":
-                        continue
-                    if sheet_name == "Permission":
-                        f.write(f"    {sheet[f'A{i}'].value} = \""
-                                f"{prefix}{sheet[f'B{i}'].value}\"\r\n")
-                    elif sheet_name == "Component":
-                        f.write(f"    {sheet[f'A{i}'].value} = \"{sheet[f'B{i}'].value}\"\r\n")
-                    else:
-                        f.write(f"    {sheet[f'A{i}'].value} = \""
-                                f"{prefix}{sheet[f'B{i}'].value}\"\r\n")
