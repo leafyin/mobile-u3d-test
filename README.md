@@ -1,11 +1,10 @@
 # 移动端app、unity3d游戏自动化测试框架
 ## 主要三方依赖：airtest、pocoui
 ## 简介
-这个项目是基于网易开源的airtest&poco框架上进行开发的，主要的目的是为自动化测试提供合适的构建方案，
-**不依赖于Airtest IDE工具**，加上airtest免费版本不支持多设备批量执行脚本，并提供多设备运行功能，
+1. 这个项目是基于网易开源的airtest&poco框架上进行开发的，主要的目的是为自动化测试提供合适的构建方案， 
+所以也是支持跨 平台运行的**不依赖于Airtest IDE工具**，加上airtest免费版本不支持多设备批量执行脚本，并提供多设备运行功能，
 实际框架结构根据你的项目情况而定，有任何问题请提[issue](https://github.com/leafyin/mobile-u3d-test/issues)
-
----
+2. 该项目使用了雷电模拟器作为基础模拟器作为测试，模拟器运行目前仅支持windows，mac请用真机
 
 ## 如何使用？
 `clone`或者`fork`当前仓库地址到你本地然后直接在工程基础上构建你的业务测试代码即可
@@ -13,7 +12,9 @@
 2. 在`Base.py`中添加了`gen_py`的函数，调用时会将`ResourceConfig.xlsx`解析成python类对象，作为辅助函数，可选 
 3. `ResourceConfig.xlsx`文件作为存放测试用例中控件的`name`而存在，以键值对的方式存放，这里只作为一个例子
 
----
+## todo
+1. 测试例子程序开发， 测试报告集成
+2. 开发基于本地web端GUI平台化操作
 
 ## Android KeyEvent
 see [KeyEvent](https://developer.android.com/reference/android/view/KeyEvent)
