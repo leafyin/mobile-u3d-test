@@ -9,8 +9,9 @@
 ## 如何使用？
 `clone`或者`fork`当前仓库地址到你本地然后直接在工程基础上构建你的业务测试代码即可
 1. 安装三方依赖库`pip install -r requirements.txt `
-2. 在`Base.py`中添加了`gen_py`的函数，调用时会将`ResourceConfig.xlsx`解析成python类对象，作为辅助函数，可选 
+2. 在`Base.py`中添加了`gen_py`的函数，调用时会将`ResourceConfig.xlsx`解析成python类对象，作为辅助函数，可选
 3. `ResourceConfig.xlsx`文件作为存放测试用例中控件的`name`而存在，以键值对的方式存放，这里只作为一个例子
+4. `ExampleTest.py`测试案例
 
 ## todo
 1. 测试例子程序开发， 测试报告集成

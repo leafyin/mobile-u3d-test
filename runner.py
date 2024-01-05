@@ -11,7 +11,7 @@ class Runner:
         self.devices = []
         system = platform.system()
         if system == 'Windows':
-            cmd = ".\init.bat"
+            cmd = ".\\init.bat"
         elif system in ['Darwin', 'Linux']:
             cmd = "sh ./init.sh"
         else:
@@ -36,4 +36,4 @@ class Runner:
 
 
 if __name__ == '__main__':
-    runner = Runner("AndroidBase.py")
+    runner = Runner("ExampleTest.py")

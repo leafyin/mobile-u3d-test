@@ -115,5 +115,4 @@ class AndroidPocoBase(Base):
 
 
 if __name__ == '__main__':
-    apb = AndroidPocoBase(sys.argv[1])
-    apb.key_event(26)
+    pass

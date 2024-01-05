@@ -12,6 +12,7 @@ def gen_py():
     根据excel表格生成python对象，写脚本的时候可以运行该方法，把表格内容转为python类对象
     :return:
     """
+    # prefix这个变量是你当前应用的包名
     prefix = ""
     filepath = "../ResourceConfig.xlsx"
     workbook = openpyxl.load_workbook(filepath)
