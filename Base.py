@@ -13,28 +13,28 @@ def gen_py():
     :return:
     """
     # prefix这个变量是你当前应用的包名
-    prefix = ""
-    filepath = "../ResourceConfig.xlsx"
+    APP_PREFIX = "com.charme.starnote:id/"
+    PERMISSION_PREFIX = "com.android.permissioncontroller:id/"
+    filepath = "ResourceConfig.xlsx"
     workbook = openpyxl.load_workbook(filepath)
     sheet_names = workbook.sheetnames
     for sheet_name in sheet_names:
         sheet = workbook[sheet_name]
         max_row = sheet.max_row + 1
         print(sheet_name)
-        with open(file=f"../gen/{sheet_name}.py", mode="w+", encoding="UTF-8-sig") as f:
+        with open(file=f"example/gen/{sheet_name}.py", mode="w+", encoding="UTF-8-sig") as f:
             f.write(f"class {sheet_name}:\r\n")
             for i in range(1, max_row):
                 if sheet_name == "Sheet":
                     continue
                 if sheet_name == "Permission":
                     f.write(f"    {sheet[f'A{i}'].value} = \""
-                            f"{prefix}{sheet[f'B{i}'].value}\"\r\n")
+                            f"{PERMISSION_PREFIX}{sheet[f'B{i}'].value}\"\r\n")
                 elif sheet_name == "Component":
                     f.write(f"    {sheet[f'A{i}'].value} = \"{sheet[f'B{i}'].value}\"\r\n")
                 else:
                     f.write(f"    {sheet[f'A{i}'].value} = \""
-                            f"{prefix}{sheet[f'B{i}'].value}\"\r\n")
-
+                            f"{APP_PREFIX}{sheet[f'B{i}'].value}\"\r\n")
 
 class Base(metaclass=abc.ABCMeta):
 
@@ -52,6 +52,7 @@ class Base(metaclass=abc.ABCMeta):
             f"&&ori_method=MINICAPORI"
             f"&&touch_method=MAXTOUCH"
         ], logdir=log_dir)
+        gen_py()
         self.poco = AndroidUiautomationPoco()
         self.device = self.poco.device
         self.width = self.device.display_info["width"]
