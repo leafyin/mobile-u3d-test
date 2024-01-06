@@ -2,7 +2,7 @@
 ## 主要三方依赖：airtest、pocoui
 ## 简介
 1. 这个项目是基于网易开源的airtest&poco框架上进行开发的，主要的目的是为自动化测试提供合适的构建方案， 
-所以也是支持跨 平台运行的**不依赖于Airtest IDE工具**，加上airtest免费版本不支持多设备批量执行脚本，并提供多设备运行功能，
+所以也是支持跨平台运行的**不依赖于Airtest IDE工具**，加上airtest免费版本不支持多设备批量执行脚本，并提供多设备运行功能，
 实际框架结构根据你的项目情况而定，有任何问题请提[issue](https://github.com/leafyin/mobile-u3d-test/issues)
 2. 该项目使用了雷电模拟器作为基础模拟器作为测试，模拟器运行目前仅支持windows，mac请用真机
 
@@ -28,7 +28,7 @@
    * `example.apk`测试apk，包名`com.charme.starnote`，测试账号：65432111，密码：yy1234
 
 ## todo
-1. 测试例子程序开发， 测试报告集成，**doing...**
+1. 测试例子程序开发， 测试报告集成，**doing...完善中**
 2. 开发基于本地web端GUI平台化操作
 
 ## Android KeyEvent

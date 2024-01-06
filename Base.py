@@ -36,6 +36,7 @@ def gen_py():
                     f.write(f"    {sheet[f'A{i}'].value} = \""
                             f"{APP_PREFIX}{sheet[f'B{i}'].value}\"\r\n")
 
+
 class Base(metaclass=abc.ABCMeta):
 
     def __init__(self, deviceid, log_dir=None):
