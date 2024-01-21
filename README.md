@@ -29,7 +29,7 @@
 
 ## todo
 1. 测试例子程序开发， 测试报告集成，**doing...完善中**
-2. 开发基于本地web端GUI平台化操作
+2. 开发基于本地web端GUI平台化操作，**doing...完善中**
 
 ## Android KeyEvent
 see [KeyEvent](https://developer.android.com/reference/android/view/KeyEvent)
