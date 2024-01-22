@@ -23,7 +23,6 @@ from example.gen.Resource import Resource
 PACKAGE_NAME = "com.charme.starnote"
 POCO_SERVICE_NAME = "com.netease.open.pocoservice"
 POCO_SERVICE_TEST_NAME = "com.netease.open.pocoservice.test"
-DEFAULT_DEVICE = "emulator-5554"
 
 APP_PREFIX = "com.charme.starnote:id/"
 PERMISSION_PREFIX = "com.android.permissioncontroller:id/"

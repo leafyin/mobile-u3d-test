@@ -1,4 +1,4 @@
-# encoding=ut-8
+# encoding=utf-8
 import random
 from AndroidBase import *
 

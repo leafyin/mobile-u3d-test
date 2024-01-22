@@ -1,21 +1,22 @@
+import sys
 import unittest
 
 import HtmlTestRunner
-from ExampleCase import *
+from example.ExampleCase import *
 
 
 class ExampleTest(unittest.TestCase):
 
     def setUp(self) -> None:
         super().setUp()
-        self.this = ExampleCase(DEFAULT_DEVICE)
+        self.this = ExampleCase(sys.argv[1])
         start_app(PACKAGE_NAME)
         sleep(3)
 
     def tearDown(self) -> None:
         super().tearDown()
-        report_name = f"/report/{self.id()}_{str(round(time.time() * 1000))}.html"
-        simple_report(__file__, True, output=report_name)
+        # report_name = f"/report/{self.id()}_{str(round(time.time() * 1000))}.html"
+        # simple_report(__file__, True, output=report_name)
 
     def doCleanups(self) -> None:
         super().doCleanups()

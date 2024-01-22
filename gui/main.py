@@ -1,10 +1,11 @@
 # encoding=utf-8
 
+import threading
+import unittest
 import platform
 import subprocess
 
-from pywebio import session
-from pywebio.input import *
+from example.ExampleTest import ExampleTest
 from pywebio.output import *
 from functools import partial
 
@@ -43,15 +44,21 @@ class MainGUI:
                 connect_device(f"Android:///{d}?cap_method=javacap&touch_method=adb")
                 keyevent("26")
 
-            def exec_case():
+            def _exec_():
+                subprocess.Popen(f"python ..\\example\\ExampleTest.py {d}",
+                                 stdout=subprocess.PIPE,
+                                 shell=True,
+                                 encoding='utf-8')
                 toast(f"设备{d}执行用例")
 
-            return put_buttons(["开关", "执行"], onclick=[onoff, exec_case])
+            return put_buttons(["开关", "运行"], onclick=[onoff, _exec_])
 
         def table():
             li = []
-            for c in range(3):
-                k = [f"测试用例{c}"]
+            loader = unittest.TestLoader()
+            suite = loader.loadTestsFromTestCase(ExampleTest)
+            for case in suite:
+                k = [case]
                 li.append(k)
             return put_table(li)
 
@@ -63,6 +70,7 @@ class MainGUI:
                 ggui.append(ts)
             return put_table(ggui, header=["设备", "用例", "操作"])
 
+        put_button("运行所有已连接设备", onclick=lambda: toast("Clicked"))
         init_gui()
 
 

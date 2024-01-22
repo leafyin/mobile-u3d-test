@@ -53,7 +53,6 @@ class Base(metaclass=abc.ABCMeta):
             f"&&ori_method=MINICAPORI"
             f"&&touch_method=MAXTOUCH"
         ], logdir=log_dir)
-        gen_py()
         self.poco = AndroidUiautomationPoco()
         self.device = self.poco.device
         self.width = self.device.display_info["width"]

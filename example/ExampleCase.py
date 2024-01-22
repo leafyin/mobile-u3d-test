@@ -1,6 +1,6 @@
-# encoding=ut-8
+# encoding=utf-8
 
-from ExampleStep import *
+from example.ExampleStep import *
 
 
 class ExampleCase(ExampleStep):
