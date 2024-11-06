@@ -6,20 +6,6 @@ from airtest.report.report import *
 from poco.exceptions import PocoNoSuchNodeException, PocoTargetTimeout
 from Base import Base
 
-from example.gen.ImageView import ImageView
-from example.gen.Card import Card
-from example.gen.Mood import Mood
-from example.gen.Button import Button
-from example.gen.Common import Common
-from example.gen.Device import Device
-from example.gen.Edit import Edit
-from example.gen.Permission import Permission
-from example.gen.RecyclerView import RecyclerView
-from example.gen.TextView import TextView
-from example.gen.DadaCard import DadaCard
-from example.gen.Component import Component
-from example.gen.Resource import Resource
-
 PACKAGE_NAME = "com.charme.starnote"
 POCO_SERVICE_NAME = "com.netease.open.pocoservice"
 POCO_SERVICE_TEST_NAME = "com.netease.open.pocoservice.test"

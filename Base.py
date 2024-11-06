@@ -15,6 +15,7 @@ def gen_py():
     # prefix这个变量是你当前应用的包名
     APP_PREFIX = "com.charme.starnote:id/"
     PERMISSION_PREFIX = "com.android.permissioncontroller:id/"
+    # 这个文件只做参照
     filepath = "ResourceConfig.xlsx"
     workbook = openpyxl.load_workbook(filepath)
     sheet_names = workbook.sheetnames
@@ -22,7 +23,7 @@ def gen_py():
         sheet = workbook[sheet_name]
         max_row = sheet.max_row + 1
         print(sheet_name)
-        with open(file=f"example/gen/{sheet_name}.py", mode="w+", encoding="UTF-8-sig") as f:
+        with open(file=f"gen/{sheet_name}.py", mode="w+", encoding="UTF-8-sig") as f:
             f.write(f"class {sheet_name}:\r\n")
             for i in range(1, max_row):
                 if sheet_name == "Sheet":
