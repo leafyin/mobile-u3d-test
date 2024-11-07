@@ -14,8 +14,18 @@ from bottle import *
 from airtest.core.api import *
 
 
+@route('/static/<filepath:path>')
+def server_static(filepath):
+    return static_file(filepath, root='static')
+
+
 @route('/')
 def index():
+    return template('index')
+
+
+@route('/show')
+def show():
     response.content_type = 'application/json'
     devices = []
     system = platform.system()
@@ -36,23 +46,30 @@ def index():
         stdout_str.pop(len(stdout_str) - 1)
         for i in range(len(stdout_str)):
             if ":" or "emulator" in stdout_str[i]:
-                devices.append(stdout_str[i].split("device")[0].strip("\t"))
+                deviceid = stdout_str[i].split("device")[0].strip("\t")
+                auto_setup(devices=[
+                    f"Android://127.0.0.1:5037/{deviceid}?cap_method=JAVACAP"
+                    f"&&ori_method=MINICAPORI"
+                    f"&&touch_method=MAXTOUCH"
+                ])
+                devices.append(deviceid)
         logging.info(f"{len(devices)} devices have been found {devices}")
-    data = {
-        'devices': devices
+    result = {
+        'code': 2000,
+        'devices': devices,
+        'initMsg': '所有设备均已初始化'
     }
-    return json.dumps(data)
+    return json.dumps(result)
 
 
-@route('/selectDevice/<deviceid>')
-def select_device(deviceid):
-
-    if deviceid:
-        auto_setup(devices=[
-            f"Android://127.0.0.1:5037/{deviceid}?cap_method=JAVACAP"
-            f"&&ori_method=MINICAPORI"
-            f"&&touch_method=MAXTOUCH"
-        ])
+@post('/selectedDevice')
+def select_device():
+    data = request.json
+    logging.info(data)
+    result = {
+        'code': 2000
+    }
+    return json.dumps(result)
 
 
 if __name__ == '__main__':

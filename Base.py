@@ -6,7 +6,6 @@ import openpyxl
 from airtest.core.api import *
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 
-
 def gen_py():
     """
     根据excel表格生成python对象，写脚本的时候可以运行该方法，把表格内容转为python类对象
