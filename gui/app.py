@@ -1,10 +1,13 @@
 # encoding=utf-8
 
 import json
+import logging
 import threading
 import unittest
 import platform
 import subprocess
+import Logging
+import Base
 
 from bottle import *
 
@@ -12,7 +15,7 @@ from airtest.core.api import *
 
 
 @route('/')
-def dropdown():
+def index():
     response.content_type = 'application/json'
     devices = []
     system = platform.system()
@@ -34,8 +37,22 @@ def dropdown():
         for i in range(len(stdout_str)):
             if ":" or "emulator" in stdout_str[i]:
                 devices.append(stdout_str[i].split("device")[0].strip("\t"))
-        print(f"{len(devices)} devices have been found {devices}")
-    return json.dumps(devices)
+        logging.info(f"{len(devices)} devices have been found {devices}")
+    data = {
+        'devices': devices
+    }
+    return json.dumps(data)
+
+
+@route('/selectDevice/<deviceid>')
+def select_device(deviceid):
+
+    if deviceid:
+        auto_setup(devices=[
+            f"Android://127.0.0.1:5037/{deviceid}?cap_method=JAVACAP"
+            f"&&ori_method=MINICAPORI"
+            f"&&touch_method=MAXTOUCH"
+        ])
 
 
 if __name__ == '__main__':
